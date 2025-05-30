@@ -31,7 +31,7 @@ function BoxPrompt({setAllChat} : Props) {
       textarea.style.overflow = 'visible'; // Ensure overflow is visible
     }
   }
-  const handleSend = () : void => {
+  const handleSend = async () : Promise<void> => {
     const textarea  = textareaRef.current;
     if(!textarea) return;
     if(textarea.value.trim() === '') return;
@@ -44,7 +44,7 @@ function BoxPrompt({setAllChat} : Props) {
     };
 
     setAllChat((prevChats : chatType[]) => [...prevChats, newChat]);
-    const botResponse: chatType = answerBot(textarea.value.trim());
+    const botResponse: chatType = await answerBot(textarea.value.trim());
     textarea.value = ''
     resizeAll();
     setAllChat((prevChats : chatType[]) => [...prevChats, botResponse]);
