@@ -1,0 +1,13 @@
+@use "variables" as *;
+.list-chat-user{
+    background-color: $color-third;
+    color: white;
+    text-align: right;
+    padding: 10px
+}
+.list-chat-bot{
+    background-color: rgb(132, 150, 167);
+    color: black;
+    text-align: left;
+    padding: 10px;
+}

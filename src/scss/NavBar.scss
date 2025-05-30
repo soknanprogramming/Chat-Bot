@@ -1,0 +1,7 @@
+@use "variables" as *;
+.nav-bar{
+    width: $width-navbar;
+    height: 100vh;
+    
+    background-color: $color-second;
+}

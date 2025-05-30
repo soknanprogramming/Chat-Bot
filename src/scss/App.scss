@@ -1,0 +1,21 @@
+// src\scss\App.scss
+@use "variables" as *;
+body {
+  background-color: $color-first;
+  margin: 0px;
+  width: 100vw; height: 100vh;
+}
+
+.app{
+  position: relative;
+  >div.nav-bar {
+    position: absolute;
+    left: 0;
+  }
+  >.app-container {
+    width:  calc(100% - #{$width-navbar});
+    height: 100vh;
+    position: absolute;
+    right: 0;
+  }
+}
