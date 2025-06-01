@@ -11,26 +11,30 @@ interface Props {
 function BoxPrompt({setAllChat} : Props) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const boxPromptRef = useRef<HTMLDivElement>(null);
+
+  // Function to resize the textarea and the box prompts
   const resizeAll = () : void => {
     const EXTRA_HEIGHT = 72; 
-    const MAX_HEIGHT = 354; // Maximum height for the textarea
+    const MAX_HEIGHT = 354; 
     const textarea  = textareaRef.current;
     const boxPrompts = boxPromptRef.current;
-     if (!textarea || !boxPrompts) return; 
+    if (!textarea || !boxPrompts) return; 
 
-    textarea.style.height = 'auto'; // Reset height to auto to calculate new height
+    textarea.style.height = 'auto'; 
     if(textarea.scrollHeight < MAX_HEIGHT){
-      textarea.style.height = `${textarea.scrollHeight}px`; // Set height to scrollHeight
-      boxPrompts.style.height = `${textarea.scrollHeight + EXTRA_HEIGHT}px`; // Adjust box height
+      textarea.style.height = `${textarea.scrollHeight}px`;
+      boxPrompts.style.height = `${textarea.scrollHeight + EXTRA_HEIGHT}px`;
       document.documentElement.style.setProperty('--match-height', `${textarea.scrollHeight + EXTRA_HEIGHT}px`)
     }
     else{
-      textarea.style.height = `${MAX_HEIGHT}px`; // Set max height
-      boxPrompts.style.height = `${MAX_HEIGHT + EXTRA_HEIGHT + 20}px`; // Adjust box height to max
+      textarea.style.height = `${MAX_HEIGHT}px`; 
+      boxPrompts.style.height = `${MAX_HEIGHT + EXTRA_HEIGHT + 20}px`; 
       document.documentElement.style.setProperty('--match-height', `${MAX_HEIGHT + EXTRA_HEIGHT + 20}px`)
-      textarea.style.overflow = 'visible'; // Ensure overflow is visible
+      textarea.style.overflow = 'visible'; 
     }
   }
+
+  // Function to handle sending the message
   const handleSend = async () : Promise<void> => {
     const textarea  = textareaRef.current;
     if(!textarea) return;
@@ -49,9 +53,17 @@ function BoxPrompt({setAllChat} : Props) {
     resizeAll();
     setAllChat((prevChats : chatType[]) => [...prevChats, botResponse]);
   }
+  
+  // Check if user presses key
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) : void => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  }
 
   useEffect(() => {
-    resizeAll(); // optional initial resize
+    resizeAll();
   }, []);
   return (
     <div className="box-prompt" ref={boxPromptRef}>
@@ -60,6 +72,7 @@ function BoxPrompt({setAllChat} : Props) {
             name="prompt" id="prompt"
             ref={textareaRef}
             onInput={resizeAll}
+            onKeyDown={handleKeyDown}
             rows={1}
         />
       </div>

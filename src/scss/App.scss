@@ -1,5 +1,5 @@
 // src\scss\App.scss
-@use "variables" as *;
+@use "modules/variables" as *;
 body {
   background-color: $color-first;
   margin: 0px;

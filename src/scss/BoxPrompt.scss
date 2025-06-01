@@ -1,4 +1,4 @@
-@use 'variables' as *;
+@use 'modules/variables' as *;
 .box-prompt {
   background-color: $color-second;
   $box-width: 672px;

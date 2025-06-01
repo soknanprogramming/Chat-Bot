@@ -15,6 +15,7 @@ const ChatInfo = ({allChat} : Prop) => {
                 return <ListChat key={id} id={id} content={content} isBot={isBot} />
             })
         }
+        <div className="div-fake"></div>
     </div>
   );
 };

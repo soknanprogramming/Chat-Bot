@@ -1,4 +1,4 @@
-@use "variables" as *;
+@use "modules/variables" as *;
 .nav-bar{
     width: $width-navbar;
     height: 100vh;
