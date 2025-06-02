@@ -1,16 +1,40 @@
-@use "modules/variables" as *;
-.list-chat-user{
-    
-    color: white;
-    text-align: right;
-    padding: 20px;
-    background-color: $color-third;
-}
-.list-chat-bot{
-    background-color: rgb(132, 150, 167);
-    color: black;
-    text-align: left;
-    padding: 10px;
-    background-color: yellowgreen;
+// src/scss/ListChat.scss
 
+@use "modules/variables" as *;
+%chat-bubble {
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 2px;
+    border-radius: 10px;
+}
+
+.list-chat-user-container{
+    .list-chat-user{
+        @extend %chat-bubble;
+        text-align: right;
+        padding: 20px;
+        background-color: $color-third;
+        width: 50%;
+        align-self: flex-end;
+        margin-right: 0px;
+        margin-left: calc(50% - 40px);
+    }
+    > button{
+        margin-left: calc(50% - 40px + 20px);
+    }
+}
+.list-chat-bot-container{
+    .list-chat-bot{
+        @extend %chat-bubble;
+        background-color: rgb(41, 40, 98);
+        width: 90%;
+        text-align: left;
+        padding: 10px;
+        align-self: flex-start;
+        margin-left: 0px;
+    
+    }
+    > button{
+        margin-left: 20px;
+    }
 }
